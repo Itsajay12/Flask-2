@@ -5,17 +5,17 @@ import os
 import sqlite3 as sql
 
 app=Flask(__name__)
- BOOK_FOLDER='./BOOK_FOLDER'
- app.config['BOOK_FOLDER']=BOOK_FOLDER
+BOOK_FOLDER='./BOOK_FOLDER'
+app.config['BOOK_FOLDER']=BOOK_FOLDER
 
- @app.route('/')
- def home3():
+@app.route('/')
+def home3():
     return render_template('home.html')
 @app.route('/bform',method=['POST','GET'])
 def bform():
     if request.method=="POST":
         nm=request.form['name']
-        p=request.from['author']
+        p=request.form['author']
         f=request.files['file']
         filename=secure_filename(f.filename)
         f.save(os.path.join(app.config['BOOK_FOLDER'],filename))
@@ -48,6 +48,6 @@ def booklist():
     cur.execute("select*from book")
     row=cur.fetchall()
     return render_template('booklist.html',rows=rows)
-if __name__='__main__':
+if __name__=='__main__':
     app.run()
     

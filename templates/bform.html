@@ -1,0 +1,10 @@
+{% extends "home.html" %}
+{% block content %}
+<form action="{{url_for('bform')}}" method="POST" enctype="multipart/form-data" class="d-flex flex-column shadow-lg">
+    Title:<input type="text" name="name">
+    Author:<input type="text" name="author">
+    Pdf:<input type="file" name="file">
+
+    <input type="submit" name="submit" class="btn btn-lg btn-success">
+</form>
+{% endblock content %}

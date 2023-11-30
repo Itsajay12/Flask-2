@@ -1,0 +1,31 @@
+{% extends "home.html" %}
+{% block content %}
+
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Author</th>
+        <th scope="col">PDF</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+        {% for row in  rows %}
+      <tr>
+        <th scope="row"> <img src="{{url_for('uploaded_file',f=row['pdf'])}}" width="250" height="250" /></th>
+        <td>{{row['name']}}</td>
+        <td>{{row['author']}}</td>
+        <td>
+            <a href="{{url_for('uploaded_file',f=row['pdf'])}}">Link</a>
+
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+<a href="/">Go back to home page</a>
+
+{% endblock content %}
