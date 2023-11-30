@@ -1,0 +1,53 @@
+from flask import  Flask,request,send_from_directory
+from flask import render_template
+from werkzeug.utils import  secure_filename
+import os
+import sqlite3 as sql
+
+app=Flask(__name__)
+ BOOK_FOLDER='./BOOK_FOLDER'
+ app.config['BOOK_FOLDER']=BOOK_FOLDER
+
+ @app.route('/')
+ def home3():
+    return render_template('home.html')
+@app.route('/bform',method=['POST','GET'])
+def bform():
+    if request.method=="POST":
+        nm=request.form['name']
+        p=request.from['author']
+        f=request.files['file']
+        filename=secure_filename(f.filename)
+        f.save(os.path.join(app.config['BOOK_FOLDER'],filename))
+
+        con=sql.connect("database3.db")
+        cur=con.cursor()
+        cur.execute("insert into book values(?,?,?)",(nm,p,filename))
+        con.commit()
+        return render_template('result.html')
+    return render_template('bform.html')
+@app.route('/upload')
+def upload():
+    return render_template('upload.html')
+
+@app.route('/uploader',method=['POST','GET'])
+def uploader():
+    if request.method=="POST":
+        f=request.file['file']
+        filename=secure_filename(f.filename)
+        f.save(os.path.join(app.config['BOOK_FOLDER'],filename))
+        return render_template('uploader.html',x=filename)
+@app.route('/up/<f>')
+def uploaded_files(f):
+        return send_from_directory(app.config['BOOK_FOLDER'],f)
+@app.route('/booklist')
+def booklist():
+    con=sql.connect("databse3.db")
+    con.row_factory=sql.Row 
+    cur=con.cursor()
+    cur.execute("select*from book")
+    row=cur.fetchall()
+    return render_template('booklist.html',rows=rows)
+if __name__='__main__':
+    app.run()
+    
