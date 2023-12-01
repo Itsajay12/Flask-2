@@ -50,6 +50,7 @@ def booklist():
     cur.execute("SELECT * FROM book")
     
     row=cur.fetchall()
+    con.close()
     return render_template('booklist.html',rows=row)
 if __name__=='__main__':
     app.run(debug=True,port=8001)
