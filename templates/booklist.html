@@ -15,11 +15,11 @@
 
         {% for row in  rows %}
       <tr>
-        <th scope="row"> <img src="{{url_for('uploaded_file',f=row['pdf'])}}" width="250" height="250" /></th>
+        <th scope="row"> <img src="{{url_for('uploaded_files',f=row['pdf'])}}" width="250" height="250" /></th>
         <td>{{row['name']}}</td>
         <td>{{row['author']}}</td>
         <td>
-            <a href="{{url_for('uploaded_file',f=row['pdf'])}}">Link</a>
+            <a href="{{url_for('uploaded_files',f=row['pdf'])}}">Link</a>
 
         </td>
       </tr>
