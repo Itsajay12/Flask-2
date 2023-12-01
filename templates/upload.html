@@ -1,8 +1,8 @@
 {% extends "home.html" %}
 
 {% block content %}
-<img src="{{url_for('uploaded_file',f=x)}}" height="400px" >
-<a herf="{{url_for('uploaded_file',f=x)}}">link</a>
+<img src="{{url_for('uploaded_files',f=x)}}" height="400px" >
+<a herf="{{url_for('uploaded_files',f=x)}}">link</a>
 
 
 {% endblock content %}
