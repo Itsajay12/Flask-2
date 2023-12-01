@@ -34,7 +34,7 @@ def upload():
 @app.route('/uploader',methods=['POST','GET'])
 def uploader():
     if request.method=="POST":
-        f=request.file['file']
+        f=request.files['file']
         filename=secure_filename(f.filename)
         f.save(os.path.join(app.config['BOOK_FOLDER'],filename))
         return render_template('uploader.html',x=filename)
