@@ -1,9 +1,9 @@
-{% extends "home.html" %}
-{% block content %}
-<form action="{{url_for('uploader')}}" method="POST"  enctype="multipart/formdata">
-<input type="file" name="file">
-<input type="submit" name="submit">
 
-</form>
+{% extends "home.html" %}
+
+{% block content %}
+<img src="{{url_for('uploaded_files',f=x)}}" height="400px" >
+<a herf="{{url_for('uploaded_files',f=x)}}">link</a>
+
 
 {% endblock content %}
